@@ -17,8 +17,8 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-const server = require('./src/app.js');
-const { conn } = require('./src/db.js');
+const server = require('./src/app.js');     //? <-- Importo mi servidor EXPRESS  
+const { conn } = require('./src/db.js');    //? <-- Importo mi base de datos SEQUELIZE
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
