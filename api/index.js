@@ -19,10 +19,12 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');     //? <-- Importo mi servidor EXPRESS  
 const { conn } = require('./src/db.js');    //? <-- Importo mi base de datos SEQUELIZE
+const getCountriesToDb = require('./src/loader/saveToDb.js');
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
   server.listen(3001, () => {
+    getCountriesToDb();
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
 });

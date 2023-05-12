@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
     },
 
     img:{
-      type: DataTypes.STRING,
+      type: DataTypes.STRING, //! revisar por si no muestra la img de la bandera
       allowNull: false,
     },
 
@@ -34,12 +34,12 @@ module.exports = (sequelize) => {
 
     subregion:{
       type: DataTypes.STRING,
-      allowNull: true,
+      // allowNull: true,
     },
 
     area:{
       type: DataTypes.INTEGER, //! comprobar "area: 6.0"
-      allowNull: true
+      // allowNull: true
     },
 
     population:{
