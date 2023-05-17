@@ -1,0 +1,31 @@
+.card {
+    width: 150px;
+    margin: 20px;
+    border-radius: 25px;
+    background-color: #a1e7d88f;
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 0px 10px #888888;
+    text-align: center;
+    padding: 20px;
+    display: inline-block;
+}
+  
+.card img {
+    width: 150px;
+    height: auto;
+    margin-top: 10px;
+    box-shadow: 0px 0px 10px #888888;
+  }
+  
+  .card h3 {
+    /* text-decoration: none; */
+    color: rgb(24, 23, 23);
+    /* margin-top: 10px; */
+    font-size: 20px;
+  }
+  .card h4 {
+    /* text-decoration: none; */
+    color: rgb(24, 23, 23);
+    /* margin-top: 10px; */
+    font-size: 20px;
+  }

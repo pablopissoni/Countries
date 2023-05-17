@@ -34,6 +34,6 @@ module.exports = (sequelize) => {
       },
     },
     
-    { timestamp: false } //* le quito las comumnas que registarn los datos de guardado y edicion
+    { timestamps: false } //* le quito las comumnas que registarn los datos de guardado y edicion
   );
 };

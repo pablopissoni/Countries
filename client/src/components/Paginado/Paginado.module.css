@@ -1,0 +1,6 @@
+.active {
+    background-color: #91f2ff71;
+    backdrop-filter: blur(10px);
+    padding: 5px;
+    border-radius: 7px;
+}

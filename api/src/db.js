@@ -34,8 +34,8 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 const {Country, Activity } = sequelize.models;
 
-Country.belongsToMany(Activity, {through:"country_activity"})
-Activity.belongsToMany(Country, {through:"country_activity"});
+Country.belongsToMany(Activity, {through:"country_activity",timestamps:false});//* asocio las 2 tablas creando una intermedia
+Activity.belongsToMany(Country, {through:"country_activity",timestamps:false});//* y agrego la propiedad "timestamps:false" para que no se cree la tabla intermedia
 
 
 // Aca vendrian las relaciones
