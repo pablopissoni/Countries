@@ -33,11 +33,20 @@ const rootReducer = (state = initialState, action) => {
             }
 
         case GET_SELECT_ACTIVITY:
-            const result = state.countries.filter(event => event.activity.includes(action.payload))
+            let sortedCountriesByActivity = action.payload === 'all'
+                ? [...state.countries]
+                : [...state.countries].filter(c => c.activities?.some(a => a.name === action.payload));
             return {
                 ...state,
-                sorting: result,
-            }
+                sorting: sortedCountriesByActivity,
+            };
+
+        // case GET_SELECT_ACTIVITY:
+        //     const result = state.countries.filter(event => event.activity.includes(action.payload))
+        //     return {
+        //         ...state,
+        //         sorting: result,
+        //     }
 
         case GET_SORT:
             const sort = action.payload === 'asc' ? state.sorting.sort((a, b) => {
@@ -79,7 +88,7 @@ const rootReducer = (state = initialState, action) => {
         case SEARCH:
             return {
                 ...state,
-                sorting: [action.payload]
+                sorting: action.payload
             }
 
         case 'DELETE_FILTERS':

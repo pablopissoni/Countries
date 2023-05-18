@@ -30,7 +30,7 @@ export const getCountriesById = (id) => async dispatch => {
 }
 
 export const getActivities = () => async dispatch => {
-    let json = await axios.get('/activities')
+    let json = await axios.get('http://localhost:3001/activity')
     return dispatch({ type: GET_ACTIVITIES, payload: json.data })
 }
 
@@ -51,7 +51,7 @@ export const continent = payload => dispatch => {
 
 export const getByName = (value) => async dispatch => {
     try {
-        let json = await axios.get(`/countries?name=${value}`) //! Revisar que pueda usar esta direccion
+        let json = await axios.get(`http://localhost:3001/countries?name=${value}`) //! Revisar que pueda usar esta direccion
         return dispatch({ type: SEARCH, payload: json.data })
     } catch (error) {
         return dispatch({ type: ERROR })

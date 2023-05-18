@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCountries } from '../../redux/actions';
 import Card from '../Card/Card';
 import Paginado from '../Paginado/Paginado';
-import Filter from '../Filter/Filter';
+
 
 
 
@@ -34,7 +34,6 @@ export default function Cards() {
     
   return (
     <div>
-        <Filter/>
 
         {paisesPorPagina.map((pais,i) => (
             <Card
