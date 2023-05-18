@@ -33,6 +33,7 @@ export default function Paginado({sorting, setCurrentPage, countriesPorPagina, c
       <button onClick={goToNextPage} disabled={currentPage === totalPages}>
         Siguiente
       </button>
+      <hr/>
     </div>
   );
 }

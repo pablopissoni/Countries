@@ -1,9 +1,10 @@
-import { CHECKING, CLOSE, CONTINENTS, ERROR, GET_ACTIVITIES, GET_COUNTRIES, GET_SELECT_ACTIVITY, GET_SORT, POPULATION, SEARCH } from './actions'
+import { CHECKING, CLOSE, CONTINENTS, ERROR, GET_ACTIVITIES, GET_COUNTRIES_BY_ID, GET_COUNTRIES, GET_SELECT_ACTIVITY, GET_SORT, POPULATION, SEARCH } from './actions'
 
 
 const initialState = {
     countries: [],
     sorting: [],
+    detail: {},
     error: false, //? Comprobar que haga falta
     check: false,   //? Comprobar que haga falta
     activities: []
@@ -11,24 +12,33 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_COUNTRIES:
-           
+
+        case GET_COUNTRIES: 
             return {
                 ...state,
                 countries: action.payload,
                 sorting: action.payload,
             }
+
+        case GET_COUNTRIES_BY_ID:
+            return  {
+                ...state,
+                detail: action.payload,
+            }
+
         case GET_ACTIVITIES:
             return {
                 ...state,
                 activities: action.payload,
             }
+
         case GET_SELECT_ACTIVITY:
             const result = state.countries.filter(event => event.activity.includes(action.payload))
             return {
                 ...state,
                 sorting: result,
             }
+
         case GET_SORT:
             const sort = action.payload === 'asc' ? state.sorting.sort((a, b) => {
                 if (a.name > b.name) return 1;
@@ -47,6 +57,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 sorting: sort
             }
+
         case POPULATION:
             const sortPopulation = action.payload === 'high' ?
                 state.sorting.sort((a, b) => b.population - a.population) :
@@ -76,22 +87,26 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 sorting: state.countries
             }
+
         case ERROR:
             return {
                 ...state,
                 error: true
             }
+
         case CLOSE:
             return {
                 ...state,
                 error: state.error === false ? false : false,
                 check: state.check === false ? false : false
             }
+
         case CHECKING:
             return {
                 ...state,
                 check: true
             }
+
         default: return state
     }
 }

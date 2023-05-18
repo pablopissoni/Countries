@@ -20,9 +20,8 @@ function App() {
       <Routes>
         <Route path = "/" element={<LandingPage/>}/>
         <Route path= "/home" element={<Home/>}/>
-        <Route path = '/detail' element={<Detail/>} />
+        <Route path = '/countries/:id' element={<Detail/>} />
       </Routes>
-      <h1>Soy un H1 en APP</h1>
     </div>
   );
 }

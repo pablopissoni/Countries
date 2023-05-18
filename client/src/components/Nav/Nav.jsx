@@ -9,7 +9,7 @@ export default function Nav() {
 
   return (
     <div>
-        <SearchBar/>
+        {/* <SearchBar/> */}
         <Link  to= '/home'><button>Todos los paises</button></Link>
         <Link to = '/activity' ><button>Crear actividad</button></Link>
         <Link to = '/' ><button>Inicio</button></Link>

@@ -9,6 +9,7 @@ export const CLOSE = 'CLOSE';
 export const CHECKING = 'CHECKING';
 export const GET_ACTIVITIES = 'GET_ACTIVITIES';
 export const GET_SELECT_ACTIVITY = 'GET_SELECT_ACTIVITY';
+export const GET_COUNTRIES_BY_ID = 'GET_COUNTRIES_BY_ID'; //* AGREGADO POR MI
 
 export const getCountries = () => async dispatch => {
     try {
@@ -18,6 +19,16 @@ export const getCountries = () => async dispatch => {
         console.log(error.message)
     }
 }
+export const getCountriesById = (id) => async dispatch => {
+    try {
+        let detail = await axios.get(`http://localhost:3001/countries/${id}`)
+        return dispatch({ type: GET_COUNTRIES_BY_ID, payload: detail.data })
+
+    } catch (error) {
+        console.log("Error en reducer al buscar por ID: ",error.message)
+    }
+}
+
 export const getActivities = () => async dispatch => {
     let json = await axios.get('/activities')
     return dispatch({ type: GET_ACTIVITIES, payload: json.data })

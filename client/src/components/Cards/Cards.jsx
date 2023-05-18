@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCountries } from '../../redux/actions';
 import Card from '../Card/Card';
 import Paginado from '../Paginado/Paginado';
+import Filter from '../Filter/Filter';
 
 
 
@@ -11,7 +12,6 @@ export default function Cards() {
 
     //* Dispatch --------------
     const dispatch = useDispatch()
-    // const countries = useSelector(state => state.countries)
     const sorting = useSelector(state => state.sorting)
     //* -----------------------
 
@@ -34,10 +34,12 @@ export default function Cards() {
     
   return (
     <div>
+        <Filter/>
 
         {paisesPorPagina.map((pais,i) => (
             <Card
                 key= {i}
+                id={pais.id}
                 img= {pais.img}
                 name= {pais.name}
                 continent= {pais.continent}
