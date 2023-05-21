@@ -14,7 +14,7 @@ export default function Paginado({sorting, setCurrentPage, countriesPorPagina, c
     setCurrentPage((prevPage) => prevPage - 1);
   };
 
-  const goToPage = (pageNumber) => {
+   const goToPage = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 

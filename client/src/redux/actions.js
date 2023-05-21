@@ -10,6 +10,9 @@ export const CHECKING = 'CHECKING';
 export const GET_ACTIVITIES = 'GET_ACTIVITIES';
 export const GET_SELECT_ACTIVITY = 'GET_SELECT_ACTIVITY';
 export const GET_COUNTRIES_BY_ID = 'GET_COUNTRIES_BY_ID'; //* AGREGADO POR MI
+export const CLEAN_DETAIL = 'CLEAN_DETAIL'; //* AGREGADO POR MI
+export const POST_ACTIVITY = 'POST_ACTIVITY' //* AGREGADO
+export const DELETE_FILTERS = 'DELETE_FILTERS' //* AGREGADO
 
 export const getCountries = () => async dispatch => {
     try {
@@ -26,6 +29,20 @@ export const getCountriesById = (id) => async dispatch => {
 
     } catch (error) {
         console.log("Error en reducer al buscar por ID: ",error.message)
+    }
+}
+
+export const cleanDetail = () => dispatch => {
+    return dispatch({ type: CLEAN_DETAIL })
+}
+
+export const postActivity = (activity) => {
+    return async (dispatch) => {
+        const response = await axios.post('http://localhost:3001/activity', activity)
+        dispatch({
+            type: POST_ACTIVITY,
+            payload: response.data
+        })
     }
 }
 
@@ -59,12 +76,13 @@ export const getByName = (value) => async dispatch => {
 }
 
 export const deleteFilters = () => dispatch => {
-    return dispatch({ type: 'DELETE_FILTERS' })
+    return dispatch({ type: DELETE_FILTERS })
 }
 
 export const errorClose = () => dispatch => {
     return dispatch({ type: CLOSE })
 }
+
 export const checking = () => dispatch => {
     return dispatch({ type: CHECKING })
 }

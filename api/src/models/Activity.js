@@ -32,6 +32,11 @@ module.exports = (sequelize) => {
         type: DataTypes.ENUM("Verano", "Otoño", "Invierno", "Primavera"),
         allowNull: false,
       },
+
+      countriesID: { //! agregado para relacionar multiples actividades con un solo pais
+        type: DataTypes.ARRAY(DataTypes.STRING),
+      },
+
     },
     
     { timestamps: false } //* le quito las comumnas que registarn los datos de guardado y edicion

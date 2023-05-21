@@ -1,17 +1,25 @@
 import React from 'react'
 // import SearchBar from '../SearchBar/SearchBar';
 import { Link } from 'react-router-dom';
+import Style from './Nav.module.css'
+import SearchBar from '../SearchBar/SearchBar';
 
-
-export default function Nav() {
-
+export default function Nav({currentPage, setCurrentPage, pathname}) {
+  
 
 
   return (
-    <div>
-        <Link  to= '/home'><button>Todos los paises</button></Link>
-        <Link to = '/activity' ><button>Crear actividad</button></Link>
-        <Link to = '/' ><button>Inicio</button></Link>
-    </div>
+    <div className={Style.navContainer}>
+      <Link to="/home" className={Style.navLink}>
+        <button className={Style.navButton}>Todos los países</button>
+      </Link>
+      <Link to="/activity" className={Style.navLink}>
+        <button className={Style.navButton}>Crear actividad</button>
+      </Link>
+      <Link to="/" className={Style.navLink}>
+        <button className={Style.navButton}>Inicio</button>
+      </Link>
+      { pathname === '/home' && <SearchBar currentPage={currentPage} setCurrentPage={setCurrentPage}/>}
+  </div>
   )
 }

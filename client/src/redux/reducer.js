@@ -1,4 +1,4 @@
-import { CHECKING, CLOSE, CONTINENTS, ERROR, GET_ACTIVITIES, GET_COUNTRIES_BY_ID, GET_COUNTRIES, GET_SELECT_ACTIVITY, GET_SORT, POPULATION, SEARCH } from './actions'
+import { CHECKING, CLOSE, CONTINENTS, ERROR,DELETE_FILTERS , GET_ACTIVITIES, POST_ACTIVITY,GET_COUNTRIES_BY_ID, GET_COUNTRIES,CLEAN_DETAIL , GET_SELECT_ACTIVITY, GET_SORT, POPULATION, SEARCH } from './actions'
 
 
 const initialState = {
@@ -26,6 +26,18 @@ const rootReducer = (state = initialState, action) => {
                 detail: action.payload,
             }
 
+        case CLEAN_DETAIL:
+                return {
+                    ...state,
+                    detail: {}
+                }
+
+        case POST_ACTIVITY:
+            return {
+                ...state,
+                activities: [...state.activities, action.payload]
+            }
+
         case GET_ACTIVITIES:
             return {
                 ...state,
@@ -49,32 +61,50 @@ const rootReducer = (state = initialState, action) => {
         //     }
 
         case GET_SORT:
-            const sort = action.payload === 'asc' ? state.sorting.sort((a, b) => {
-                if (a.name > b.name) return 1;
+            const sort = action.payload === 'asc'
+            ? [...state.countries].sort((a, b) => a.name.localeCompare(b.name))
+            : [...state.countries].sort((a, b) => b.name.localeCompare(a.name));
 
-                if (a.name < b.name) return -1;
-
-                return 0;
-            }) : action.payload === 'desc' ? state.sorting.sort((a, b) => {
-                if (a.name > b.name) return -1;
-
-                if (a.name < b.name) return 1;
-
-                return 0;
-            }) : [...state.countries]
             return {
-                ...state,
+            ...state,
                 sorting: sort
             }
+        // case GET_SORT:
+        //     const sort = action.payload === 'asc' ? state.sorting.sort((a, b) => {
+        //         if (a.name > b.name) return 1;
+
+        //         if (a.name < b.name) return -1;
+
+        //         return 0;
+        //     }) : action.payload === 'desc' ? state.sorting.sort((a, b) => {
+        //         if (a.name > b.name) return -1;
+
+        //         if (a.name < b.name) return 1;
+
+        //         return 0;
+        //     }) : [...state.countries]
+        //     return {
+        //         ...state,
+        //         sorting: sort
+        //     }
 
         case POPULATION:
-            const sortPopulation = action.payload === 'high' ?
-                state.sorting.sort((a, b) => b.population - a.population) :
-                action.payload === 'low' ? state.sorting.sort((a, b) => a.population - b.population) : [...state.countries]
+            const sortPopulation = action.payload === 'high'
+            ? [...state.countries].sort((a, b) => b.population - a.population)
+            : [...state.countries].sort((a, b) => a.population - b.population);
             return {
                 ...state,
                 sorting: sortPopulation
             }
+
+        // case POPULATION:
+        //     const sortPopulation = action.payload === 'high' ?
+        //         state.sorting.sort((a, b) => b.population - a.population) :
+        //         action.payload === 'low' ? state.sorting.sort((a, b) => a.population - b.population) : [...state.countries]
+        //     return {
+        //         ...state,
+        //         sorting: sortPopulation
+        //     }
 
         case CONTINENTS:
             const select = [...state.countries]
@@ -91,7 +121,7 @@ const rootReducer = (state = initialState, action) => {
                 sorting: action.payload
             }
 
-        case 'DELETE_FILTERS':
+        case DELETE_FILTERS:
             return {
                 ...state,
                 sorting: state.countries

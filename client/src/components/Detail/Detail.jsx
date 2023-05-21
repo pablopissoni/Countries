@@ -3,7 +3,7 @@ import Style from './Detail.module.css'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { getCountriesById } from '../../redux/actions'
+import { getCountriesById, cleanDetail } from '../../redux/actions'
 
 
 export default function Detail() {
@@ -17,9 +17,11 @@ export default function Detail() {
   //* -----------------
   useEffect(() => {
     dispatch(getCountriesById(id))
+    return () => dispatch(cleanDetail()) //! (VER PORQUE COMO ARROW) cuando se desmonta el componente se limpia el Detail
   }, [dispatch, id])
   //* -----------------
 
+  
   return (
     <div className={Style.detail}>
       <h4>Detail del id: {id}</h4>
@@ -32,7 +34,7 @@ export default function Detail() {
       <h4>Poblacion: {detail.population? detail.population : 'No hay datos'}</h4>
       <hr/>
 
-      {detail.activities? detail.activities.map((act,i) => //! Revisar porque aveces da error y al comentarlo por un segundo se soluciona
+      {detail.activities?.length > 0 ? detail.activities.map((act,i) => //! Revisar porque aveces da error y al comentarlo por un segundo se soluciona
         <div key={i}>
           <h4>Name: {act.name}</h4>
           <h4>Dificultad: {act.difficulty}</h4>
