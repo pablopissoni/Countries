@@ -95,13 +95,15 @@ export default function Create() {
             <h2>Crear actividades</h2>
 
             <div>
-                <label>Nombre*</label>
+                <label>Nombre<span style={{color: "red"}}>*</span></label>
                 <input type="text" name="name" value={create.name} onChange={handleInput} className={Style.inputField} />
                 {error.name && <p>{error.name}</p>}
             </div>
 
             <div>
-                <label>Dificultad*</label>
+                <label>
+                  Dificultad<span style={{color: "red"}}>*</span>
+                </label>
                 <select
                   name="difficulty"
                   value={create.difficulty}
@@ -133,7 +135,7 @@ export default function Create() {
             </div>
 
             <div>
-                <label>Temporada*</label>
+                <label>Temporada<span style={{color: "red"}}>*</span></label>
                 <select name="season" onChange={handleInput} value={create.season} className={Style.selectField}>
                   <option value="">-- Opciones --</option>
                   <option value="Verano">Verano</option>
@@ -145,7 +147,7 @@ export default function Create() {
             </div>
 
             <div>
-                <label>Paises*</label>
+                <label>Paises<span style={{color: "red"}}>*</span></label>
                 <select name="countriesID" value={create.countriesID} onChange={handleSelect} className={Style.selectField}>
                   <option >-- Opciones --</option>
                   {countriesSorted?.map((event, i) => (
