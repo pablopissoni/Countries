@@ -23,9 +23,10 @@ export default function Detail() {
 
   
   return (
+    <div className={Style.container}>
     <div className={Style.detail}>
       <h4>Detail del id: {id}</h4>
-      <h4>Nombre: {detail.name}</h4>
+      <h3>{detail.name}</h3>
       <img src={detail.img} alt='Imagen del pais'/>
       <h4>Continente: {detail.continent}</h4>
       <h4>Capital: {detail.capital}</h4>
@@ -44,6 +45,7 @@ export default function Detail() {
         </div>) 
       : <h4>Sin actividades</h4>}
     
+   </div>
    </div>
   )
 }

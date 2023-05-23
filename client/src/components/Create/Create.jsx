@@ -2,17 +2,20 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { postActivity } from '../../redux/actions';
+import { postActivity, getCountries } from '../../redux/actions';
 import Style from './Create.module.css';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Create() {
+  const navigate = useNavigate();
     let countries = useSelector((state) => state.countries);
     let dispatch = useDispatch();
 
     const [create, setCreate] = useState({
         name: "",
         difficulty: "",
-        duration: "",
+        duration: "" || null, //* Si no se pasa duracion queda en NULL
         season: "",
         countriesID: [],
         // flags: ''
@@ -26,7 +29,7 @@ export default function Create() {
 
     if (!create.difficulty) errors.difficulty = "Selecciona la dificultad";
 
-    if (create.duration < 1 || create.duration > 1000) errors.duration = "Ingresa la duracion";
+    if ( create.duration > 1000) errors.duration = "No debe pasar de 1000"; //! Duracion no es obligatorio
 
     if (!create.season) errors.season = "Selecciona una temporada";
 
@@ -76,48 +79,43 @@ export default function Create() {
   //   dispatch(postActivity(create))
   //   event.preventDefault();
   // }
-
   const handleSubmit = (e) => {
     e.preventDefault();
     validation(create);
-    // setError({});
     dispatch(postActivity(create));
+    dispatch(getCountries());
     setCreate({
       name: "",
       difficulty: "",
       duration: "",
       season: "",
       countriesID: [],
-      // flags: ''
     });
+    navigate("/home");
     console.log(create);
   };
 
-  // const handleSubmit = () => {
-  //   axios.post("/activity", create);
-  //   // setForm(false);
-  //   // dispatch(checking());
-  // };
-
   return (
+    <div className={Style.pageContainer}>
     <div className={Style.createContainer}>
-        {/* <div>Create</div> */}
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={Style.form}>
             <h2>Crear actividades</h2>
 
-            <label>Nombre</label>
-            <input type="text" name="name" onChange={handleInput} className={Style.inputField} />
-            {error.name && <p>{error.name}</p>}
+            <div>
+                <label>Nombre*</label>
+                <input type="text" name="name" onChange={handleInput} className={Style.inputField} />
+                {error.name && <p>{error.name}</p>}
+            </div>
 
             <div>
-                <label>Difficulty</label>
+                <label>Dificultad*</label>
                 <select
                   name="difficulty"
                   onChange={handleInput}
                   className={Style.selectField}
                 >
-                  <option value="">--Select Difficulty--</option>
+                  <option value="">-- Nivel --</option>
                   <option value="1">⭐ ☆ ☆ ☆ ☆</option>
                   <option value="2">⭐⭐ ☆ ☆ ☆</option>
                   <option value="3">⭐⭐⭐ ☆ ☆</option>
@@ -133,14 +131,17 @@ export default function Create() {
                   type="number"
                   name="duration"
                   onChange={handleInput}
+                  min={0}
+                  max={1000}
+                  className={Style.durationField}
                 />
                 {error.duration && <p>{error.duration}</p>}
             </div>
 
             <div>
-                <label>Temporada</label>
-                <select name="season" onChange={handleInput}>
-                  <option value="">--Select Temporada--</option>
+                <label>Temporada*</label>
+                <select name="season" onChange={handleInput} className={Style.selectField}>
+                  <option value="">-- Opciones --</option>
                   <option value="Verano">Verano</option>
                   <option value="Otoño">Otoño</option>
                   <option value="Invierno">Invierno</option>
@@ -150,9 +151,9 @@ export default function Create() {
             </div>
 
             <div>
-                <label>Countries</label>
+                <label>Paises*</label>
                 <select name="countriesID" onChange={handleSelect} className={Style.selectField}>
-                  <option >--Select Countries--</option>
+                  <option >-- Opciones --</option>
                   {countriesSorted?.map((event, i) => (
                     <option key={i} value={event.id}>
                       {event.name}
@@ -178,6 +179,7 @@ export default function Create() {
             </button>
         </form>
 
+    </div>
     </div>
   )
 }

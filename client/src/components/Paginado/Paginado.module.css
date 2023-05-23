@@ -1,16 +1,7 @@
-/* .active {
-    background-color: #91f2ff71;
-    backdrop-filter: blur(10px);
-    padding: 5px;
-    border-radius: 7px;
-} */
-
 .paginado {
-    /* display: flex; */
     justify-content: center;
     align-items: center;
-    padding: 3px;
-    /* background-color: #f5f5f5; */
+    padding: 30px;
     box-shadow: 0 10px 10px #000000f3;
   }
   

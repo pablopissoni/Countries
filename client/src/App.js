@@ -23,7 +23,7 @@ function App() {
         <Route path = "/" element={<LandingPage/>}/>
         <Route path= "/home" element={<Home currentPage={currentPage} setCurrentPage={setCurrentPage}/>}/>
         <Route path = '/countries/:id' element={<Detail/>} />
-        <Route path = '/activity' element={<Create/>} />
+        <Route path = '/activity' element={<Create/>}/>
       </Routes>
     </div>
   );

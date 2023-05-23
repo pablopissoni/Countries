@@ -1,12 +1,15 @@
 const axios = require("axios");
 const { Country } = require("../db");
+// const URL = require("./dataBase"); //? Parte como parche de la URL local
 
-const URL = "https://restcountries.com/v3/all"; //? podria si bien ubicarlo en el archivo ".env"
+// const URL = "https://restcountries.com/v3/all"; //? URL original que esta caida
+const URL = "https://rest-countries.up.railway.app/v3/all";
 
 const getCountriesToDb = async () => {
   try {
-    const getCountries = await axios.get(URL);
-    const countriesInfo = getCountries.data.map((country) => {
+    const getCountries = await axios.get(URL);                 //? Parte del URL original que se crasheo
+    const countriesInfo = getCountries.data.map((country) => { //? Parte del URL original que se crasheo
+    // const countriesInfo = URL.map((country) => {                  //? Parte como parche de la URL local ^^
       //* en "coutriesUnfo" se terminan guardando todos los paises
       return {
         id: country.cca3,

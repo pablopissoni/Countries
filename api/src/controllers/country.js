@@ -19,11 +19,11 @@ const getCountries = async (req, res) => {
         },
         include: Activity,
       });
-      return res.status(200).json(allCountries); //! si falla probar con .send
+      return res.status(200).json(allCountries);
       
     } else {
       const allCountries = await Country.findAll({include: Activity,});
-      return res.status(200).json(allCountries); //! si falla probar con .send
+      return res.status(200).json(allCountries);
     }
     
   } catch (error) {
@@ -33,7 +33,6 @@ const getCountries = async (req, res) => {
 
 
 } 
- //! revisar codigo
 
 const getCountryById = async (req, res) => {
 try {
@@ -46,22 +45,6 @@ try {
        console.log("error ",error);
    }
 }
-
-// const getCountryById = async (req, res) => {
-//     try {
-//         const idCountry = req.params.idCountry.toUpperCase();
-//         const foundCountry = await Country.findOne({
-//             where: {
-//                 id: idCountry
-//             },
-//             include: Activity
-//         });
-//         return res.json(foundCountry)
-//     }
-//     catch(error){
-//         res.send(error)
-//     }
-// }
 
 module.exports = {
     getCountries,

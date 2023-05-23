@@ -1,4 +1,4 @@
-const { Country, Activity } = require("../db"); //! si falla revisar la extexion del archivo
+const { Country, Activity } = require("../db");
 
 //* por si le pinta funcionar en algun momento, pero no se como hacerlo
 const postActivity = async (req, res) => {
@@ -6,7 +6,6 @@ const postActivity = async (req, res) => {
     const { name, difficulty, duration, season, countriesID } = req.body;
     try {
         const createActivity = await Activity.create({
-            // id: id, // deberia haber un id autogenerado o puesto por nosotros pero no se como hacerlo, por ahora lo dejo asi
             name: name,
             difficulty: difficulty,
             duration: duration,
@@ -16,10 +15,10 @@ const postActivity = async (req, res) => {
         const checkCountry = await Country.findAll({
             where: {
                 id :countriesID
-                // id: countryID
+                
             }
         });
-        const addActivity = await createActivity.setCountries(checkCountry); //! investigar el setCountries
+        const addActivity = await createActivity.setCountries(checkCountry);
         
         console.log("se posteo correctamente")
         return res.json(addActivity);

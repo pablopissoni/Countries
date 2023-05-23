@@ -7,11 +7,10 @@ module.exports = (sequelize) => {
     "activity",
     {
       id: {
-        type: DataTypes.UUID, //! repasar
-        defaultValue: DataTypes.UUIDV4, //! agragado al ultimo
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         allowNull: false,
         primaryKey: true,
-        // defaultValue: DataTypes.UUIDV4, //! agragado al ultimo
       },
 
       name: {
@@ -20,12 +19,12 @@ module.exports = (sequelize) => {
       },
 
       difficulty: {
-        type: DataTypes.ENUM('1','2','3','4','5'), //! supongo que cada numero es un string
+        type: DataTypes.ENUM('1','2','3','4','5'),
         allowNull: false,
       },
 
       duration: {
-        type: DataTypes.INTEGER, //! Duración (en horas). veridicar que no pueda ser un TIME
+        type: DataTypes.INTEGER,
       },
 
       season: {
@@ -33,7 +32,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
 
-      countriesID: { //! agregado para relacionar multiples actividades con un solo pais
+      countriesID: {
         type: DataTypes.ARRAY(DataTypes.STRING),
       },
 
