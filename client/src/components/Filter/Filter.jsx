@@ -19,13 +19,13 @@ export default function Filter({setCurrentPage}) {
     //* FUNCION DE ORDENAMIENTO ---------------
     const handleContinent = (event) => {
         dispatch(continent(event.target.value))
-        // setInput(1)
+
         setCurrentPage(1)
     }
 
     const handleActivity = (event) => {
         dispatch(getSelectActivity(event.target.value))
-        // setInput(1)
+   
         setCurrentPage(1)
     }
 

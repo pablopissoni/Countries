@@ -10,14 +10,14 @@ export default function Detail() {
   //* Dispatch y ejecutado
   const dispatch = useDispatch()
   const detail = useSelector(state => state.detail) //* Detalles del pais por el ID
-  // const actividades = detail.activities             //! al usarlo asi falla al reiniciar la pagina
   const {id} = useParams() // accedo a los parametros de la ruta
 
   console.log(detail.activities)
+
   //* -----------------
   useEffect(() => {
     dispatch(getCountriesById(id))
-    return () => dispatch(cleanDetail()) //! (VER PORQUE COMO ARROW) cuando se desmonta el componente se limpia el Detail
+    return () => dispatch(cleanDetail())
   }, [dispatch, id])
   //* -----------------
 
@@ -35,7 +35,7 @@ export default function Detail() {
       <h4>Poblacion: {detail.population? detail.population : 'No hay datos'}</h4>
       <hr/>
 
-      {detail.activities?.length > 0 ? detail.activities.map((act,i) => //! Revisar porque aveces da error y al comentarlo por un segundo se soluciona
+      {detail.activities?.length > 0 ? detail.activities.map((act,i) =>
         <div key={i}>
           <h4>Name: {act.name}</h4>
           <h4>Dificultad: {act.difficulty}</h4>

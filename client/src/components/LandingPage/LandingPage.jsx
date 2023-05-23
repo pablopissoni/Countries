@@ -1,5 +1,3 @@
-//* "raftc" o "RFC" comando para crear componente
-// import React from 'react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Style from '../LandingPage/LandingPage.module.css'

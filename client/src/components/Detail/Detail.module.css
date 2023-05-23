@@ -6,14 +6,10 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
-  background-size: cover;   
-  /* background-position: 0px 20px; */
-  /* background-size: 100% 100%;    */
+  background-size: cover;
 }
 
 .detail {
-    /* width: 150px; */
-    /* background-image: url('../../../img/fondoCamara.jpg'); */
     width: auto;
     margin: 20px;
     border-radius: 25px;
@@ -33,13 +29,11 @@
   }
   
   .detail h3 {
-    /* text-decoration: none; */
     color: rgb(24, 23, 23);
     margin: 20px 0px 0px 0px;
     font-size: 32px;
   }
   .detail h4 {
-    /* text-decoration: none; */
     color: rgb(24, 23, 23);
     margin: 20px 0px 20px 0px;
     font-size: 20px;

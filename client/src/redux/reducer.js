@@ -2,12 +2,12 @@ import { CHECKING, CLOSE, CONTINENTS, ERROR,DELETE_FILTERS , GET_ACTIVITIES, POS
 
 
 const initialState = {
-    countries: [],
-    sorting: [],
+    countries: [], //no modificable
+    sorting: [], //modificablee
     detail: {},
-    error: false, //? Comprobar que haga falta
-    check: false,   //? Comprobar que haga falta
-    activities: []
+    activities: [],
+    error: false,
+    check: false
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -53,12 +53,6 @@ const rootReducer = (state = initialState, action) => {
                 sorting: sortedCountriesByActivity,
             };
 
-        // case GET_SELECT_ACTIVITY:
-        //     const result = state.countries.filter(event => event.activity.includes(action.payload))
-        //     return {
-        //         ...state,
-        //         sorting: result,
-        //     }
 
         case GET_SORT:
             const sort = action.payload === 'asc'
@@ -69,24 +63,6 @@ const rootReducer = (state = initialState, action) => {
             ...state,
                 sorting: sort
             }
-        // case GET_SORT:
-        //     const sort = action.payload === 'asc' ? state.sorting.sort((a, b) => {
-        //         if (a.name > b.name) return 1;
-
-        //         if (a.name < b.name) return -1;
-
-        //         return 0;
-        //     }) : action.payload === 'desc' ? state.sorting.sort((a, b) => {
-        //         if (a.name > b.name) return -1;
-
-        //         if (a.name < b.name) return 1;
-
-        //         return 0;
-        //     }) : [...state.countries]
-        //     return {
-        //         ...state,
-        //         sorting: sort
-        //     }
 
         case POPULATION:
             const sortPopulation = action.payload === 'high'
@@ -96,15 +72,6 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 sorting: sortPopulation
             }
-
-        // case POPULATION:
-        //     const sortPopulation = action.payload === 'high' ?
-        //         state.sorting.sort((a, b) => b.population - a.population) :
-        //         action.payload === 'low' ? state.sorting.sort((a, b) => a.population - b.population) : [...state.countries]
-        //     return {
-        //         ...state,
-        //         sorting: sortPopulation
-        //     }
 
         case CONTINENTS:
             const select = [...state.countries]

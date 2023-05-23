@@ -1,5 +1,4 @@
 import React from 'react'
-// import SearchBar from '../SearchBar/SearchBar';
 import { Link } from 'react-router-dom';
 import Style from './Nav.module.css'
 import SearchBar from '../SearchBar/SearchBar';

@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { postActivity, getCountries } from '../../redux/actions';
+import { postActivity, getCountries, getActivities } from '../../redux/actions';
 import Style from './Create.module.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -18,7 +18,6 @@ export default function Create() {
         duration: "" || null, //* Si no se pasa duracion queda en NULL
         season: "",
         countriesID: [],
-        // flags: ''
       });
 
   //* Validaciones -------------------------
@@ -29,14 +28,13 @@ export default function Create() {
 
     if (!create.difficulty) errors.difficulty = "Selecciona la dificultad";
 
-    if ( create.duration > 1000) errors.duration = "No debe pasar de 1000"; //! Duracion no es obligatorio
+    if ( create.duration > 1000) errors.duration = "No debe pasar de 1000"; 
 
     if (!create.season) errors.season = "Selecciona una temporada";
 
     if (!create.countriesID[0]) errors.countriesID = "Selecciona algun Pais";
 
     setError(errors);
-    // return Object.keys(errors).length === 0;
   }
   useEffect(() => {
     validation(create);
@@ -55,13 +53,11 @@ export default function Create() {
           setCreate({
             ...create,
             countriesID: [...create.countriesID, event.target.value],
-            // flags: [...create.flags, event.target.valor]
           });
         }
       };
 
       let countriesSorted = countries.sort((a, b) => a.name.localeCompare(b.name)); 
-      //! REVISAR QUE HACE BIEN ^^^^^^^^^^^^^^^^
       //* Ordena alfabeticamente los paises
       
       const handleDelete = (event) => {
@@ -73,26 +69,21 @@ export default function Create() {
             ),
           });
       };
-        //! REVISAR QUE HACE BIEN ^^^^^^^^^^^^^^^^
+        //*  Elimina el pais seleccionado ^^^^^^^^^^^^^^^^
 
-  // const handleSubmit = (event) => {
-  //   dispatch(postActivity(create))
-  //   event.preventDefault();
-  // }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     validation(create);
     dispatch(postActivity(create));
-    dispatch(getCountries());
-    setCreate({
-      name: "",
-      difficulty: "",
-      duration: "",
-      season: "",
-      countriesID: [],
-    });
-    navigate("/home");
-    console.log(create);
+    // setCreate({
+    //   name: "",
+    //   difficulty: "",
+    //   duration: "",
+    //   season: "",
+    //   countriesID: [],
+    // });
+    // navigate("/home");
   };
 
   return (

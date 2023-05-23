@@ -3,7 +3,6 @@ const { Router } = require('express');
 // Ejemplo: const authRouter = require('./auth.js');
 const countryRouters = require('./countryRoutes');
 const activityRoutes = require('./activityRoutes');
-// const activityRoute = require('./activityRoutes')  //! revisar
 
 
 const router = Router();

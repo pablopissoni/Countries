@@ -1,7 +1,7 @@
-import { useState } from 'react';
+
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getCountries, getSort } from '../../redux/actions';
+import { getCountries, getActivities } from '../../redux/actions';
 import Card from '../Card/Card';
 import Paginado from '../Paginado/Paginado';
 import Filter from '../Filter/Filter';
@@ -29,7 +29,7 @@ export default function Cards({currentPage, setCurrentPage}) {
     
     
     //? Me carga los paises principales
-    useEffect(() => {
+    useEffect(() => {        
         dispatch(getCountries());
         
       },[dispatch]);

@@ -10,7 +10,6 @@ function SearchBar ({currentPage, setCurrentPage}) {
     
 
     const handleChange = (event) => {
-        // handleSubmit()
         setNombre(event.target.value);
     }
 

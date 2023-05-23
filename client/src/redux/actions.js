@@ -9,14 +9,14 @@ export const CLOSE = 'CLOSE';
 export const CHECKING = 'CHECKING';
 export const GET_ACTIVITIES = 'GET_ACTIVITIES';
 export const GET_SELECT_ACTIVITY = 'GET_SELECT_ACTIVITY';
-export const GET_COUNTRIES_BY_ID = 'GET_COUNTRIES_BY_ID'; //* AGREGADO POR MI
-export const CLEAN_DETAIL = 'CLEAN_DETAIL'; //* AGREGADO POR MI
-export const POST_ACTIVITY = 'POST_ACTIVITY' //* AGREGADO
-export const DELETE_FILTERS = 'DELETE_FILTERS' //* AGREGADO
+export const GET_COUNTRIES_BY_ID = 'GET_COUNTRIES_BY_ID';
+export const CLEAN_DETAIL = 'CLEAN_DETAIL';
+export const POST_ACTIVITY = 'POST_ACTIVITY' 
+export const DELETE_FILTERS = 'DELETE_FILTERS' 
 
 export const getCountries = () => async dispatch => {
     try {
-        let json = await axios.get('http://localhost:3001/countries') //! Revisar que no sea `http://localhost:3001/countries`
+        let json = await axios.get('http://localhost:3001/countries')
         return dispatch({ type: GET_COUNTRIES, payload: json.data })
     } catch (error) {
         console.log(error.message)
@@ -68,7 +68,7 @@ export const continent = payload => dispatch => {
 
 export const getByName = (value) => async dispatch => {
     try {
-        let json = await axios.get(`http://localhost:3001/countries?name=${value}`) //! Revisar que pueda usar esta direccion
+        let json = await axios.get(`http://localhost:3001/countries?name=${value}`)
         return dispatch({ type: SEARCH, payload: json.data })
     } catch (error) {
         return dispatch({ type: ERROR })
