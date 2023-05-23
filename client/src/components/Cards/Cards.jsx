@@ -1,7 +1,7 @@
 
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getCountries, getActivities } from '../../redux/actions';
+import { getCountries } from '../../redux/actions';
 import Card from '../Card/Card';
 import Paginado from '../Paginado/Paginado';
 import Filter from '../Filter/Filter';

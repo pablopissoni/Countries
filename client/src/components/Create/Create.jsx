@@ -2,13 +2,12 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { postActivity, getCountries, getActivities } from '../../redux/actions';
+import { postActivity } from '../../redux/actions';
 import Style from './Create.module.css';
-import { useNavigate } from 'react-router-dom';
+
 
 
 export default function Create() {
-  const navigate = useNavigate();
     let countries = useSelector((state) => state.countries);
     let dispatch = useDispatch();
 
@@ -71,21 +70,23 @@ export default function Create() {
       };
         //*  Elimina el pais seleccionado ^^^^^^^^^^^^^^^^
 
+  const resetForm = () => {
+    setCreate({
+      name: "",
+      difficulty: "",
+      duration: "",
+      season: "",
+      countriesID: [],
+    });
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     validation(create);
     dispatch(postActivity(create));
-    // setCreate({
-    //   name: "",
-    //   difficulty: "",
-    //   duration: "",
-    //   season: "",
-    //   countriesID: [],
-    // });
-    // navigate("/home");
+    resetForm();
   };
-
+  
   return (
     <div className={Style.pageContainer}>
     <div className={Style.createContainer}>
@@ -95,7 +96,7 @@ export default function Create() {
 
             <div>
                 <label>Nombre*</label>
-                <input type="text" name="name" onChange={handleInput} className={Style.inputField} />
+                <input type="text" name="name" value={create.name} onChange={handleInput} className={Style.inputField} />
                 {error.name && <p>{error.name}</p>}
             </div>
 
@@ -103,9 +104,10 @@ export default function Create() {
                 <label>Dificultad*</label>
                 <select
                   name="difficulty"
+                  value={create.difficulty}
                   onChange={handleInput}
                   className={Style.selectField}
-                >
+                  >
                   <option value="">-- Nivel --</option>
                   <option value="1">⭐ ☆ ☆ ☆ ☆</option>
                   <option value="2">⭐⭐ ☆ ☆ ☆</option>
@@ -121,17 +123,18 @@ export default function Create() {
                 <input
                   type="number"
                   name="duration"
+                  value={create.duration}
                   onChange={handleInput}
                   min={0}
                   max={1000}
                   className={Style.durationField}
-                />
+                  />
                 {error.duration && <p>{error.duration}</p>}
             </div>
 
             <div>
                 <label>Temporada*</label>
-                <select name="season" onChange={handleInput} className={Style.selectField}>
+                <select name="season" onChange={handleInput} value={create.season} className={Style.selectField}>
                   <option value="">-- Opciones --</option>
                   <option value="Verano">Verano</option>
                   <option value="Otoño">Otoño</option>
@@ -143,7 +146,7 @@ export default function Create() {
 
             <div>
                 <label>Paises*</label>
-                <select name="countriesID" onChange={handleSelect} className={Style.selectField}>
+                <select name="countriesID" value={create.countriesID} onChange={handleSelect} className={Style.selectField}>
                   <option >-- Opciones --</option>
                   {countriesSorted?.map((event, i) => (
                     <option key={i} value={event.id}>
@@ -155,18 +158,21 @@ export default function Create() {
             </div>
 
             <div>
-              {create.countriesID?.map((country, i) => (
-                <span key={i} value={country}>
-                  {country}
-                  <button onClick={handleDelete} value={country} >
-                    X
-                  </button>
-                </span>
-              ))}
+            {create.countriesID?.map((countryId, i) => {
+              const selectedCountry = countries.find((country) => country.id === countryId);
+              return (
+                  <span key={i} value={countryId} className={Style.countryItem}>
+                    {selectedCountry && selectedCountry.name}
+                    <button onClick={handleDelete} value={countryId} className={Style.deleteButton}>
+                      X
+                    </button>
+                  </span>
+                );
+              })}
             </div>
             
             <button type="submit" disabled={Object.keys(error).length > 0} className={Style.submitButton}>
-              Create
+              Crear
             </button>
         </form>
 
